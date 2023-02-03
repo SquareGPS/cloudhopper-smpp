@@ -31,6 +31,7 @@ import org.jboss.netty.channel.ChannelUpstreamHandler;
 import org.jboss.netty.channel.MessageEvent;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.slf4j.MDC;
 
 /**
  * Channel handler responsible for logging the bytes sent/received on an 
@@ -98,12 +99,14 @@ public class SmppSessionLogger implements ChannelUpstreamHandler, ChannelDownstr
 
     @Override
     public void handleUpstream(ChannelHandlerContext ctx, ChannelEvent e) throws Exception {
+        MDC.setContextMap(options.getMdcContext());
         log(Direction.UP, e);
         ctx.sendUpstream(e);
     }
 
     @Override
     public void handleDownstream(ChannelHandlerContext ctx, ChannelEvent e) throws Exception {
+        MDC.setContextMap(options.getMdcContext());
         log(Direction.DOWN, e);
         ctx.sendDownstream(e);
     }

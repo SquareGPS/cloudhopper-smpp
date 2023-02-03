@@ -26,11 +26,8 @@ import com.cloudhopper.smpp.impl.UnboundSmppSession;
 import com.cloudhopper.smpp.ssl.SslConfiguration;
 import com.cloudhopper.smpp.ssl.SslContextFactory;
 import javax.net.ssl.SSLEngine;
-import org.jboss.netty.channel.Channel;
-import org.jboss.netty.channel.ChannelHandlerContext;
-import org.jboss.netty.channel.ChannelPipelineCoverage;
-import org.jboss.netty.channel.ChannelStateEvent;
-import org.jboss.netty.channel.SimpleChannelUpstreamHandler;
+
+import org.jboss.netty.channel.*;
 import org.jboss.netty.channel.group.ChannelGroup;
 import org.jboss.netty.handler.ssl.SslHandler;
 import org.slf4j.Logger;
@@ -41,7 +38,7 @@ import org.slf4j.LoggerFactory;
  * 
  * @author joelauer (twitter: @jjlauer or <a href="http://twitter.com/jjlauer" target=window>http://twitter.com/jjlauer</a>)
  */
-@ChannelPipelineCoverage("all")
+@ChannelHandler.Sharable
 public class SmppServerConnector extends SimpleChannelUpstreamHandler {
     private static final Logger logger = LoggerFactory.getLogger(SmppServerConnector.class);
 
